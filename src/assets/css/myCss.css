@@ -1,0 +1,32 @@
+/* web-font */
+@font-face { 
+    font-family: 'yangjin'; 
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+
+
+/* crop image into square */
+.crop-container {
+    position: relative;
+    width: 37%; 
+  }
+.crop-container:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%; 
+  }
+  
+.crop-container img {
+    position: absolute; 
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+    object-position: center;
+  }
