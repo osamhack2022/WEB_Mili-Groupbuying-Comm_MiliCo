@@ -1,45 +1,46 @@
+import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Intro from "./pages/intro.js";
 import Result from "./pages/result.js";
-import ResultCard from "./components/resultCard.js"
-import { Layout, Menu } from 'antd';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import "./assets/css/App.css"
-import './../node_modules/antd/dist/antd.css';
+import ResultId from "./pages/resultId.js";
+import Register from "./pages/register.js";
+import Forgot from "./pages/forgot.js";
+import NavigationBar from "./components/NavigationBar.js";
+import { Layout } from 'antd';
+
+
+import './../node_modules/antd/dist/antd.compact.min.css';
+
+import "./assets/css/myCss.css"
+
 const { Header, Footer, Content } = Layout;
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Layout className="layout">
-        <Header>
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            items={new Array(15).fill(null).map((_, index) => {
-              const key = index + 1;
-              return {
-                key,
-                label: `nav ${key}`,
-              };
-            })}
-          />
-        </Header>
-        <Content>
-        <div className="site-layout-content">
-          <Routes>
-              <Route path="/" element={<Intro/>}></Route>
-              <Route path="/result/*" element={<Result/>}></Route>
-          </Routes>
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-      </Layout>
+class App extends React.Component {
+  render(){
+    return (
+    <BrowserRouter>
+      <div className="App">
+        <Layout>
+          <Header className="my-header">
+            <NavigationBar/>
+          </Header>
+          <Content>
+            <div className="site-layout-content">
+              <Routes>
+                <Route path="/" element={<Intro/>}></Route>
+                <Route path="/result/*" element={<Result/>}></Route>
+                <Route path="/register/*" element={<Register/>}></Route>
+                <Route path="/forgot" element={<Forgot/>}></Route>
+                <Route path="/resultId" element={<ResultId/>}></Route>
+              </Routes>
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>MiliCom 2022</Footer>
+        </Layout>
+      </div>
     </BrowserRouter>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

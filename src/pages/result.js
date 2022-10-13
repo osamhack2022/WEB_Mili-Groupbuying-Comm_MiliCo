@@ -1,9 +1,10 @@
-import react from "react";
+import React from "react";
 import {Row, Col} from "antd"
 import ResultCard from "../components/resultCard";
+import { Link } from "react-router-dom"
 
 
-class Result extends react.Component{
+class Result extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -32,7 +33,12 @@ class Result extends react.Component{
     render(){
         return(
           <Row gutter={16}>
-            {this.state.testData.map( (el,i) => <Col className="gutter-row" key={i} span={8}> <ResultCard data={el}></ResultCard> </Col>)}
+            {      
+                this.state.testData.map( 
+                    (el,i) =>   <Col className="gutter-row" key={i} span={8}> 
+                                    <Link to="/resultId"><ResultCard data={el}></ResultCard></Link>
+                                </Col>)
+            }
           </Row>  
         );
     }

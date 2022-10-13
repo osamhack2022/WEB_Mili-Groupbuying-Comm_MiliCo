@@ -6,7 +6,6 @@ import taxiIcon from "../assets/img/taxiIcon.png";
 import packageIcon from "../assets/img/packageIcon.png";
 import deliveryIcon from "../assets/img/deliveryIcon.png";
 import { Link } from 'react-router-dom';
-import "../assets/css/myCss.css"
 const {Title} = Typography;
 
 class Intro extends React.Component{

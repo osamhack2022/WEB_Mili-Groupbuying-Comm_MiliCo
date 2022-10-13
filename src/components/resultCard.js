@@ -1,11 +1,11 @@
-import react from "react";
+import React from "react";
 import { Card, Typography } from "antd";
 import axios from "axios"
 
 const key = "68108b5f64c63fa7d533db21ef556142"
 const previewApiUrl = "http://api.linkpreview.net/"
 
-class ResultCard extends react.Component{
+class ResultCard extends React.Component{
 
     constructor(props){
         super(props);
