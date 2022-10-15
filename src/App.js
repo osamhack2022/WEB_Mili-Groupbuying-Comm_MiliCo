@@ -5,6 +5,9 @@ import Result from "./pages/result.js";
 import ResultId from "./pages/resultId.js";
 import Register from "./pages/register.js";
 import Forgot from "./pages/forgot.js";
+import Create from "./pages/create.js";
+import Buying from "./pages/buying.js";
+import My from "./pages/my.js";
 import NavigationBar from "./components/NavigationBar.js";
 import { Layout } from 'antd';
 
@@ -32,6 +35,9 @@ class App extends React.Component {
                 <Route path="/register/*" element={<Register/>}></Route>
                 <Route path="/forgot" element={<Forgot/>}></Route>
                 <Route path="/resultId" element={<ResultId/>}></Route>
+                <Route path="/create" element={<Create/>}></Route>
+                <Route path="/buying" element={<Buying/>}></Route>
+                <Route path="/my" element={<My/>}></Route>
               </Routes>
             </div>
           </Content>

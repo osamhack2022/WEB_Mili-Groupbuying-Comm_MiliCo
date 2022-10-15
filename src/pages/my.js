@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 
 
 
-class Result extends React.Component{
+class My extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -59,39 +59,20 @@ class Result extends React.Component{
     render(){
         return(
             <>
-            <p style={{padding: "10px 220px", fontSize:"1.5rem"}}><strong>뭐시기 뭐시기</strong> 검색결과</p>
+            <p style={{padding: "10px 220px", fontSize:"1.5rem"}}>나의 공동구매</p>
           <Row style={{margin:"0 200px"}}>
             {      
                 this.state.testData.map( 
                     (el,i) =>   <Col key={i} span={6}> 
-                                    <Link to="/resultId"><ResultCard data={el}></ResultCard></Link>
+                                    <Link to="/buying"><ResultCard data={el}></ResultCard></Link>
                                 </Col>)
             }
-            <Col span={6}>       
-                <div style={{padding:"20px", width:"100%", height:"100%"}}>
-                    <Link to="/create">
-                        <Button style={{width:"100%", height:"100%", fontWeight:"100", fontSize:"2rem"}} type="dashed" block>
-                            <div>
-                                <SmileTwoTone style={{fontSize:"3rem"}}/>
-                                <div
-                                    style={{
-                                    marginTop: 8,
-                                    }}
-                                >
-                                    원하는 상품이 없다면 <br/>
-                                    직접 모집해보세요!
-                                </div>
-                            </div>
-                        </Button>
-                    </Link>
-                </div>      
-            </Col>
-          </Row> 
-          <Pagination size="small" total={50} style={{textAlign:"center"}} />
+            </Row>
+          <Pagination size="small" total={1} style={{textAlign:"center"}} />
           </>
         );
     }
 }
 
 
-export default Result;
+export default My;

@@ -27,7 +27,8 @@ class NavigationBar extends React.Component{
                 </Link>
                 <div className="nav-btn-wrapper">
                     <Login />
-                    <Button className="nav-btn" >뭔가 버튼</Button>
+                    <Link to="/my"><Button type="link" className="nav-btn" >My page</Button>
+                    </Link>
                 </div>
             </>
         );

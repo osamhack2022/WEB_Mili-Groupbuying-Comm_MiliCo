@@ -21,19 +21,26 @@ class ResultCard extends React.Component{
                         <img src={this.state.cardImg} alt="noImage"/>
                     </div>
                 }
-                bordered={true}
-                style={{width:"80%"}}
+                bordered={false}
+                style={{margin:"20px"}}
                 hoverable={true}
                 >
-              <Typography.Title level={3}>{this.state.title}</Typography.Title>
-              <Typography>{this.state.progress}</Typography>
-              <Typography>{this.state.host}</Typography>
+                <Typography.Title 
+                    ellipsis={ {
+                            rows: 1,
+                        }
+                    }
+                    level={3}
+                    style={{fontSize:"1rem"}}
+                    >{this.state.title}</Typography.Title>
+                <Typography>{this.state.progress}</Typography>
             </Card>
         );
     }
 
     async componentDidMount(){
         try {
+            throw(err);
             const data = await axios.get(previewApiUrl, {params: { key, q: this.state.infoLink}});
             console.log(data.data.image);
             this.setState((state)=>{
@@ -41,10 +48,10 @@ class ResultCard extends React.Component{
                 return state;
             })
         } catch(error){
-            console.log(error);
+            // console.log(error);
             // 실패시 부를 이미지
             this.setState((state)=>{
-                state.cardImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Noimage.svg/739px-Noimage.svg.png";
+                state.cardImg = "https://mp-seoul-image-production-s3.mangoplate.com/36517_1545847047139204.jpg?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80";
                 return state;
             })
         }

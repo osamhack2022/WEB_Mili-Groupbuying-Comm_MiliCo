@@ -1,12 +1,48 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@font-face {
+  font-family: 'yangjin';
+  src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 /* Layout CSS */
+
 Header.my-header{
     background: #fff;
 }
-
 .site-layout-content {
-  /* min-height: 280px; */
-  padding: 24px;
   background: #fff;
+  height:900px;
+}
+
+/* Intro CSS */
+.intro-title-img{
+  width: 100%;
+}
+h1.intro-title-main{
+  margin-top: 30px;
+  margin-bottom: 0px;
+  font-family: yangjin;
+  color:#FF9933;
+  font-size: 3.9rem;
+}
+h5.intro-title-sub{
+  margin-bottom: 0px;
+  margin-top: 0px !important;
+  font-family: yangjin;
+  color: #F8CBAD;
+  font-size: 1.8rem;
+}
+.intro-cards-wrapper{
+  margin-top: 30px;
+}
+.intro-card{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.intro-search-wrapper{
+  margin-top:30px;
 }
 
 
@@ -62,36 +98,106 @@ form.register-form{
 }
 
 
+/* grouping CSS */
+.grouping-header-img-wrapper{
+  position: relative;
+  width: 100%;
+  height: 17em;      /*반응형 높이 필요*/
+  overflow: hidden;
+}
+.grouping-header-img{
+  filter: brightness(0.6) blur(10px);
+  position: absolute; 
+  width: 100%;
+  height: 100%; 
+  object-fit: cover;
+  object-position: center;
+}
+.grouping-header-title-wrapper{
+  position: absolute; 
+  width: 100%;
+  height: 100%; 
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.grouping-header-type{
+  color: #3399FF;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: large;
+}
+.grouping-header-title{
+  padding: 10px;
+  color: #fff;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 3em;
 
-/* web-font */
-@font-face { 
-    font-family: 'yangjin'; 
-    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); 
-    font-weight: normal; 
-    font-style: normal; 
+}
+.grouping-page-wrapper{
+  margin: 3% 10%;
+}
+.grouping-page-img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.grouping-page-descr-wrapper{
+  width: 100%;
+  margin: 5% 0;
+  background-color: #c9e5ff;
+  color: #1890ff;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.grouping-page-descr-th{
+  width: 80px;
+  /* flex-basis: 10%; */
+  /* flex-shrink: 0; */
+}
+.grouping-page-descr-td{
+  flex-basis: 80%;
+  flex-grow: 1;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.grouping-page-progress-text{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 2rem;
+}
+.grouping-page-progress-date{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 2rem;
+}
+.grouping-page-progress-info{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 2rem;
+}
+.grouping-page-progress-text>span{
+  font-size: 3rem;
+  font-weight: 500;
 }
 
 /* crop image into square */
 .crop-container {
-    position: relative;
-    width: 100%; 
-  }
-.crop-container:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%; 
-  }
-  
+  position: relative;
+  width: 100%; 
+}
+.crop-container::after {
+  content: "";
+  display: block;
+  padding-bottom: 70%; 
+} 
 .crop-container img {
-    position: absolute; 
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0; 
-    width: 100%;
-    height: 100%; 
-    object-fit: cover;
-    object-position: center;
+  position: absolute;  
+  width: 100%;
+  height: 100%; 
+  object-fit: cover;
+  object-position: center;
 }
 

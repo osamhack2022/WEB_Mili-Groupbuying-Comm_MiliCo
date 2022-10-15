@@ -35,7 +35,7 @@ class Login extends react.Component{
         return(
             <>
             <Button className="nav-btn" type="primary" onClick={this.showModal}>
-              Open Modal
+              로그인
             </Button>
             <Modal footer={null} title={null} open={this.state.isModalOpen} onCancel={this.handleCancel}>
                 <Typography.Title className="login-title">Login</Typography.Title>
