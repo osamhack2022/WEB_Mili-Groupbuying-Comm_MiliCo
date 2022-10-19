@@ -1,7 +1,7 @@
 import React from "react";
 import {Row, Col, Pagination, Button} from "antd"
 import { SmileTwoTone } from '@ant-design/icons';
-import ResultCard from "../components/resultCard";
+import ItemCard from "../components/itemCard";
 import { Link } from "react-router-dom"
 
 
@@ -64,12 +64,12 @@ class Result extends React.Component{
             {      
                 this.state.testData.map( 
                     (el,i) =>   <Col key={i} span={6}> 
-                                    <Link to="/resultId"><ResultCard data={el}></ResultCard></Link>
+                                    <Link to="/item"><ItemCard data={el}></ItemCard></Link>
                                 </Col>)
             }
             <Col span={6}>       
                 <div style={{padding:"20px", width:"100%", height:"100%"}}>
-                    <Link to="/create">
+                    <Link to="/item-create">
                         <Button style={{width:"100%", height:"100%", fontWeight:"100", fontSize:"2rem"}} type="dashed" block>
                             <div>
                                 <SmileTwoTone style={{fontSize:"3rem"}}/>

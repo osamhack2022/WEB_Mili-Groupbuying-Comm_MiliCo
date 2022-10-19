@@ -5,7 +5,7 @@ import axios from "axios"
 const key = "68108b5f64c63fa7d533db21ef556142"
 const previewApiUrl = "http://api.linkpreview.net/"
 
-class ResultCard extends React.Component{
+class ItemCard extends React.Component{
 
     constructor(props){
         super(props);
@@ -60,4 +60,4 @@ class ResultCard extends React.Component{
 }
 
 
-export default ResultCard;
+export default ItemCard;

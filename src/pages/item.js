@@ -3,7 +3,7 @@ import { Button, Progress, Typography,Divider, Statistic } from 'antd';
 import { LikeOutlined } from '@ant-design/icons';
 import {Row, Col} from "antd"
 
-class ResultId extends React.Component{
+class Item extends React.Component{
     constructor(props){
         super(props);
         this.state={}
@@ -71,4 +71,4 @@ class ResultId extends React.Component{
 }
 
 
-export default ResultId;
+export default Item;

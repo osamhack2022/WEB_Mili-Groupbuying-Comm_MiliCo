@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const {Title} = Typography;
 
 
-const Intro = () =>{
+const Intro = (props) =>{
   const navigate = useNavigate();
     return(
       <>
@@ -30,7 +30,7 @@ const Intro = () =>{
         <Row className="intro-cards-wrapper" gutter={16}>
           <Col span={9}></Col>
           <Col className="gutter-row" span={2}>
-            <Link to="/result/taxi">
+            <Link to="/item-list/taxi">
               <Card 
               className="intro-card"
               cover={<img src={taxiIcon} alt="taxiIcon"/>}
@@ -42,7 +42,7 @@ const Intro = () =>{
             </Link>
           </Col>
           <Col className="gutter-row" span={2}>
-            <Link to="/result/taxi">
+            <Link to="/item-list/taxi">
               <Card 
               className="intro-card"
               cover={<img src={packageIcon} alt="packageIcon"/>}
@@ -54,7 +54,7 @@ const Intro = () =>{
             </Link>
           </Col>
           <Col className="gutter-row" span={2}>
-            <Link to="/result/taxi">
+            <Link to="/item-list/taxi">
               <Card 
               className="intro-card"
               cover={<img src={deliveryIcon} alt="deliveryIcon"/>}
@@ -75,7 +75,7 @@ const Intro = () =>{
             placeholder="원하는 상품을 검색해서 모집하세요" 
             style={{marginTop:"30px", fontSize:"1.5rem", height:"70px", width:"100%"}}
             prefix={<SearchOutlined />}
-            onPressEnter={()=>{navigate('/result')}}
+            onPressEnter={()=>{navigate('/item-list')}}
             />
           </Col>
           <Col className="gutter-row" span={8}></Col>

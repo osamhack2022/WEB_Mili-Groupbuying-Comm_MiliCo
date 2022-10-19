@@ -1,7 +1,7 @@
 import React from "react";
 import {Row, Col, Pagination, Button} from "antd"
 import { SmileTwoTone } from '@ant-design/icons';
-import ResultCard from "../components/resultCard";
+import ItemCard from "../components/itemCard";
 import { Link } from "react-router-dom"
 
 
@@ -64,7 +64,7 @@ class My extends React.Component{
             {      
                 this.state.testData.map( 
                     (el,i) =>   <Col key={i} span={6}> 
-                                    <Link to="/buying"><ResultCard data={el}></ResultCard></Link>
+                                    <Link to="/item-manage"><ItemCard data={el}></ItemCard></Link>
                                 </Col>)
             }
             </Row>

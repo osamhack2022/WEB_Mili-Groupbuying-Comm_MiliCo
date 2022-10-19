@@ -7,6 +7,10 @@
 }
 /* Layout CSS */
 
+* {
+  font-family: "Noto Sans KR"
+}
+
 Header.my-header{
     background: #fff;
 }
