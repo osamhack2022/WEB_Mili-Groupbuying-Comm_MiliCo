@@ -1,0 +1,17 @@
+{
+    "development": {
+      "port": 3306,
+      "db": {
+        "host": "localhost",
+        "username": "root",
+        "password": "0000",
+        "database": "MILICODB",
+        "timezone": "+09:00",
+        "dialect": "mysql",
+        "define": {
+          "charset": "utf8"
+        }
+      }
+    }
+  }
+  
