@@ -30,7 +30,7 @@ const Intro = (props) =>{
         <Row className="intro-cards-wrapper" gutter={16}>
           <Col span={9}></Col>
           <Col className="gutter-row" span={2}>
-            <Link to="/item-list/taxi">
+            <Link to="/item-list?searchWord=taxi">
               <Card 
               className="intro-card"
               cover={<img src={taxiIcon} alt="taxiIcon"/>}
@@ -42,7 +42,7 @@ const Intro = (props) =>{
             </Link>
           </Col>
           <Col className="gutter-row" span={2}>
-            <Link to="/item-list/taxi">
+            <Link to="/item-list?searchWord=market">
               <Card 
               className="intro-card"
               cover={<img src={packageIcon} alt="packageIcon"/>}
@@ -54,7 +54,7 @@ const Intro = (props) =>{
             </Link>
           </Col>
           <Col className="gutter-row" span={2}>
-            <Link to="/item-list/taxi">
+            <Link to="/item-list?searchWord=delivery">
               <Card 
               className="intro-card"
               cover={<img src={deliveryIcon} alt="deliveryIcon"/>}
@@ -75,7 +75,7 @@ const Intro = (props) =>{
             placeholder="원하는 상품을 검색해서 모집하세요" 
             style={{marginTop:"30px", fontSize:"1.5rem", height:"70px", width:"100%"}}
             prefix={<SearchOutlined />}
-            onPressEnter={()=>{navigate('/item-list')}}
+            onPressEnter={(e)=>{navigate(`/item-list/?searchWord=${e.target.value}`)}}
             />
           </Col>
           <Col className="gutter-row" span={8}></Col>

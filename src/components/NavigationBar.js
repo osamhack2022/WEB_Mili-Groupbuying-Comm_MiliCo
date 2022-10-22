@@ -21,7 +21,7 @@ const NavigationBar = (props) => {
         const result = await axios.delete('/rest/users/sessions');
         if(result.data.result){
             props.setLogin(0);
-            message("로그아웃됐습니다.");
+            message.success("로그아웃됐습니다.");
             navigate("/");
         }
         

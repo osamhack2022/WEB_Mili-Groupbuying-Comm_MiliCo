@@ -44,8 +44,8 @@ const login = async function(req, res){
     try {
         const result = await models.User.findOne({
             where: {
-                SERV_NUM: req.body.SERV_NUM,
-                PASSWD: req.body.PASSWD
+                service_id: req.body.service_id,
+                password: req.body.password
             }
         });
         if(result !== null){
@@ -103,7 +103,7 @@ const createUsers = async function(req, res){
             res.send({
                 result: false,
                 duplicate: true,
-                error: 'SERV_NUM duplicate'
+                error: 'service_id duplicate'
             });
         }else{
             res.send({

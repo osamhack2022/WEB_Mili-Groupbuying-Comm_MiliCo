@@ -2,20 +2,20 @@ module.exports = (sequelize, DataTypes) => {
     const Payer = sequelize.define(
       "Payer",
       {
-        USER_TB_FK1: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          comment: "유저(USER_TB 참조)",
-        },
-        BANK: {
-          type: DataTypes.STRING(100),
+        bank: {
+          type: DataTypes.STRING(10),
           allowNull: false,
           comment: "계좌은행",
         },
-        ACCNT: {
+        account: {
             type: DataTypes.STRING(100),
             allowNull: false,
-            comment: "입금계좌",
+            comment: "계좌번호",
+        },
+        punctuality: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            comment: "기한 내 제품 구입 여부 [기한초과: 0 정상진행: 1]",
         }
       },
       {
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     );
   
     Payer.associate = (models) => {
-        Payer.belongsTo(models.User);
+        Payer.belongsTo(models.User, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
         Payer.hasOne(models.Item);
     };
   

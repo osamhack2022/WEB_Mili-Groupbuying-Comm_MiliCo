@@ -1,8 +1,9 @@
 import express from 'express';
 import aa from 'express-async-await';
-import { printHello } from './member';
+import { getMembersByItemId, enrollMember } from './member';
 const router = aa(express.Router());
 
-router.get('/test', printHello);
+router.post('/:id', enrollMember);
+router.get('/:id', getMembersByItemId);
 
 module.exports = router;

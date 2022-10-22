@@ -43,13 +43,13 @@ const Login = (props) =>{
             onFinish={onFinish}
             >
                 <Form.Item
-                    name="SERV_NUM"
+                    name="service_id"
                     rules={[{required: true, message: '군번을 입력해주세요',},]}
                 >
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                 </Form.Item>
                 <Form.Item
-                    name="PASSWD"
+                    name="password"
                     rules={[{required: true, message: '비밀번호를 입력해주세요',},]}
                 >
                     <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password"/>

@@ -82,14 +82,12 @@ function Register (props){
     };
 
     const onFinish = async (values) => {
-        console.log(props);
         try{
             const result = await axios.post("/rest/users", {
                 ...values,
-                UNIT: values.UNIT.join(' '),
-                TRUST: 36
+                unit: values.unit.join(' '),
+                trust_index: 36
             });
-            console.log(result.data);
             if(result.data.result){
                 message.success('회원가입이 완료되었습니다.');
                 navigate('/');
@@ -114,7 +112,7 @@ function Register (props){
             scrollToFirstError
         >
             <Form.Item
-                name="SERV_NUM"
+                name="service_id"
                 label="군번"
                 rules={[
                     {
@@ -135,7 +133,7 @@ function Register (props){
             </Form.Item>
 
             <Form.Item
-                name="PASSWD"
+                name="password"
                 label="비밀번호"
                 rules={[
                     {
@@ -160,7 +158,7 @@ function Register (props){
                     },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
-                            if (!value || getFieldValue('PASSWD') === value) {
+                            if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
                             return Promise.reject(new Error('비밀번호가 일치하지 않습니다.'));
@@ -172,7 +170,7 @@ function Register (props){
             </Form.Item>
 
             <Form.Item
-                name="USR_NAME"
+                name="name"
                 label="이름"
                 rules={[
                     {
@@ -185,7 +183,7 @@ function Register (props){
             </Form.Item>
 
             <Form.Item
-                name="USR_RANK"
+                name="rank"
                 label="계급"
                 rules={[
                     {
@@ -204,7 +202,7 @@ function Register (props){
             </Form.Item>
 
             <Form.Item
-                name="UNIT"
+                name="unit"
                 label="부대"
                 rules={[
                     {

@@ -2,15 +2,15 @@ module.exports = (sequelize, DataTypes) => {
     const Member = sequelize.define(
       "Member",
       {
-        USER_TB_FK1: {
+        payment: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          comment: "유저(USER_TB 참조)",
+          comment: "입금현황 [입금대기: 0 입금확인요청: 1 입금확인완료: 2 미지불: 3]",
         },
-        STEP: {
+        accept: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          comment: "입금현황",
+          comment: "입금현황 [변경요청도착: 0 변경요청없음: 1 변경수락: 2]",
         }
       },
       {
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     );
   
     Member.associate = (models) => {
-      Member.belongsTo(models.User);
-      Member.hasMany(models.ItemMember);
+      Member.belongsTo(models.User, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+      Member.belongsTo(models.Item, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
     };
   
     return Member;

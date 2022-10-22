@@ -1,7 +1,10 @@
 import React from "react";
-import { Select, InputNumber, Slider, Divider, Button, Form, Input, Radio, DatePicker, TimePicker } from 'antd';
+import axios from "axios";
+import { Select, message, InputNumber, Slider, Divider, Button, Form, Input, Radio, DatePicker, TimePicker } from 'antd';
+import { useNavigate } from "react-router-dom";
 
-const ItemCreate = () => {
+const ItemCreate = (props) => {
+    const navigate = useNavigate();
     const formItemLayout = 
         {
             labelCol: {
@@ -18,8 +21,20 @@ const ItemCreate = () => {
                 offset: 4,
             },
         };
-    const onFinish = (values) => {
-        console.log(values);
+    const onFinish = async (values) => {
+        try{
+            if(!props.login){ 
+                message.error("로그인을 해주세요.");
+                throw "no session"; }
+            const result = await axios.post("/rest/items", {...values, UserId:props.login});
+            console.log(result);
+            if(result.data.result){
+                message.success("성공적으로 등록되었습니다.");
+                navigate("/item/result.data.data.id");
+            }
+        } catch(err){
+            console.error(err);
+        }
     }
     return (
         <div style={{padding: "100px", fontFamily:"Noto Sans KR"}}>
@@ -32,7 +47,7 @@ const ItemCreate = () => {
             >
                 <Divider orientation="left">상품정보</Divider>
                 <div>
-                    <Form.Item required={true} label="분야" name="FIELD">
+                    <Form.Item required={true} label="분야" name="field">
                         <Radio.Group 
                         >
                             <Radio.Button value="0">택시합승</Radio.Button>
@@ -40,16 +55,16 @@ const ItemCreate = () => {
                             <Radio.Button value="2">배달음식</Radio.Button>
                         </Radio.Group>
                     </Form.Item>
-                     <Form.Item required={true} label="상품제목" name="TITLE">
+                     <Form.Item required={true} label="상품제목" name="title">
                         <Input placeholder="제목" />
                     </Form.Item>
-                    <Form.Item required={true} label="상품링크" name="LINK">
+                    <Form.Item required={true} label="상품링크" name="link">
                         <Input placeholder="링크" />
                     </Form.Item>   
-                    <Form.Item required={true} label="상품설명" name="DESCR">
+                    <Form.Item required={true} label="상품설명" name="description">
                         <Input.TextArea rows={4} />
                     </Form.Item>
-                    <Form.Item required={true} label="가격" name="PRICE">
+                    <Form.Item required={true} label="가격" name="price">
                         <InputNumber 
                         formatter={(value) => `₩ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         parser={(value) => value.replace(/\₩\s?|(,*)/g, '')} 
@@ -62,7 +77,7 @@ const ItemCreate = () => {
                     <Form.Item 
                     required={true}
                     label="모집인원&nbsp;(본인 제외)"
-                    name="MEMBER_LIM"
+                    name="member_limit"
                     >
                         <Slider
                         max={30}
@@ -78,10 +93,10 @@ const ItemCreate = () => {
                         }}
                         />
                     </Form.Item>
-                    <Form.Item name="PAYER" required={true} label="입금계좌">
+                    <Form.Item required={true} label="입금계좌">
                         <Input.Group compact>
                             <Form.Item
-                                name="BANK"
+                                name="bank"
                                 noStyle
                                 rules={[
                                 {
@@ -101,7 +116,7 @@ const ItemCreate = () => {
                                 </Select>
                             </Form.Item>
                             <Form.Item
-                                name="ACCNT"
+                                name="account"
                                 required={true}
                                 noStyle
                                 rules={[
@@ -120,7 +135,10 @@ const ItemCreate = () => {
                             </Form.Item>
                         </Input.Group>
                     </Form.Item>
-                    <Form.Item name="DUE" required="true" label="입금 기한" rules={[{ type: 'object', required: true, message: '입금기한을 입력해주세용' }]}>
+                    <Form.Item name="due_group" required="true" label="모집기한" rules={[{ type: 'object', required: true, message: '모집기한을 입력해주세요' }]}>
+                        <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
+                    </Form.Item>
+                    <Form.Item name="due_money" required="true" label="입금 기한" rules={[{ type: 'object', required: true, message: '입금기한을 입력해주세요' }]}>
                         <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
                     </Form.Item>
                 </div> 
