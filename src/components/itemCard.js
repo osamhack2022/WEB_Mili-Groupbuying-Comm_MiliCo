@@ -9,8 +9,6 @@ class ItemCard extends React.Component{
 
     constructor(props){
         super(props);
-        const tempData = this.props.data;
-        this.state = tempData;
     }
     
     render(){   
@@ -18,7 +16,7 @@ class ItemCard extends React.Component{
             <Card 
                 cover={
                     <div className="crop-container">
-                        <img src={this.state.cardImg} alt="noImage"/>
+                        <img src={this.props.data.img} alt="noImage"/>
                     </div>
                 }
                 bordered={false}
@@ -32,29 +30,29 @@ class ItemCard extends React.Component{
                     }
                     level={3}
                     style={{fontSize:"1rem"}}
-                    >{this.state.title}</Typography.Title>
-                <Typography>{this.state.progress}</Typography>
+                    >{this.props.data.title}</Typography.Title>
+                <Typography>{this.props.data.progress}</Typography>
             </Card>
         );
     }
 
     async componentDidMount(){
-        try {
-            throw(err);
-            const data = await axios.get(previewApiUrl, {params: { key, q: this.state.infoLink}});
-            console.log(data.data.image);
-            this.setState((state)=>{
-                state.cardImg = data.data.image;
-                return state;
-            })
-        } catch(error){
-            // console.log(error);
-            // 실패시 부를 이미지
-            this.setState((state)=>{
-                state.cardImg = "https://mp-seoul-image-production-s3.mangoplate.com/36517_1545847047139204.jpg?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80";
-                return state;
-            })
-        }
+        // try {
+        //     throw(err);
+        //     const data = await axios.get(previewApiUrl, {params: { key, q: this.state.infoLink}});
+        //     console.log(data.data.image);
+        //     this.setState((state)=>{
+        //         state.cardImg = data.data.image;
+        //         return state;
+        //     })
+        // } catch(error){
+        //     // console.log(error);
+        //     // 실패시 부를 이미지
+        //     this.setState((state)=>{
+        //         state.cardImg = "https://mp-seoul-image-production-s3.mangoplate.com/36517_1545847047139204.jpg?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80";
+        //         return state;
+        //     })
+        // }
     }
 
 }

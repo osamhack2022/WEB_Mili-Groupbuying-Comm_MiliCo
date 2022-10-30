@@ -113,9 +113,42 @@ const createUsers = async function(req, res){
         }
     }
 }
-// (POST) /users/id/trust-idx
+// (POST) /users/trust/indexx
 // : id 유저의 믿음용사점수 수정하기
+const updateTrust = async function(req, res){
+    try {
+        const ddd = req.body.trust_info;
+        console.log(ddd);
+        let result = [];
+        var i;
+        for(i=0; i<ddd.length; i++){
+            const r = await models.User.update({
+                trust_index: Math.round(ddd[i].trust_index*ddd[i].offset),
+            },{
+                where:{
+                    id: ddd[i].UserId
+                }
+            });
+            result.push(r);
+        }
+        console.log(result);
+        if(result.length == ddd.length){ 
+            res.send({
+                result: true,
+                data: result
+            });   
+        }
+    } catch(err){
+        console.error(err);
+        res.status(500);
+        res.send({
+            result: false,
+            error: 'DB error'
+        });
+    }
+}
+
 
 export {
-    getUsers, createUsers, login, getSession, logout
+    getUsers, createUsers, login, getSession, logout, updateTrust
 }

@@ -129,7 +129,6 @@ const createItem = async function(req, res){
         const item = {
             ...body,
             PayerId: payer_result.dataValues.id,
-            img: "https://open.lge.co.kr/link/2020/ha/usp_banner/12/3101_ha_brandView/images/01.jpg",
             member_current: 0,
             stage: 0,
             like: 0,
@@ -152,15 +151,12 @@ const createItem = async function(req, res){
     }
 }
 
-const getItemByUserId = async function(req, res){
+const updateStage = async function(req, res){
     try {
-        const result = await models.Member.findAll( {
-            where: { UserId: req.params.id },
-            include: [
-                { 
-                    model: models.Item
-                }
-            ]
+        const result = await models.Item.update( {
+            stage: req.body.stage
+        },{
+            where: { id: req.params.id },
         });
         if(result){
             res.send({
@@ -177,19 +173,109 @@ const getItemByUserId = async function(req, res){
         });
     }
 }
-// (POST) /items/members
-// : 현재 멤버 수 수정하기
+const updateEggPoint = async function(req, res){
+    try {
+        const result = await models.Item.update( {
+            egg_point: req.body.egg_point
+        },{
+            where: { id: req.params.id },
+        });
+        if(result){
+            res.send({
+                result: true,
+                data: result,
+            })
+        }
+    } catch(err){
+        console.error(err);
+        res.status(500);
+        res.send({
+            result: false,
+            error: 'DB error'
+        });
+    }
+}
+const updateMemberLimit = async function(req, res){
+    try {
+        const result = await models.Item.update( {
+            member_limit: req.body.member_limit
+        },{
+            where: { id: req.params.id },
+        });
+        if(result){
+            res.send({
+                result: true,
+                data: result,
+            })
+        }
+    } catch(err){
+        console.error(err);
+        res.status(500);
+        res.send({
+            result: false,
+            error: 'DB error'
+        });
+    }
+}
+const updateDue = async function(req, res){
+    try {
+        const result = await models.Item.update( {
+            due_group: req.body.due_group
+        },{
+            where: { id: req.params.id },
+        });
+        if(result){
+            res.send({
+                result: true,
+                data: result,
+            })
+        }
+    } catch(err){
+        console.error(err);
+        res.status(500);
+        res.send({
+            result: false,
+            error: 'DB error'
+        });
+    }
+}
 
-// (POST) /items/incentives
-// : 구매자 인센티브 수정하기
 
-// (POST) /items/like-counts
-// : 구매자 인센티브 수정하기
+const getItemByUserId = async function(req, res){
+    try {
+        const result = await models.Member.findAll( {
+            where: { UserId: req.params.id },
+            include: [
+                { 
+                    model: models.Item
 
-// (POST) /items/steps
-// : 구매 단계 수정하기
+                }
+            ]
+        });
+        // const testResult = await models.Item.findOne( {
+        //     where: { id: 11 }
+        // });
+        if(result){
+            // res.send({
+            //     result: true,
+            //     data: {result, testResult},
+            // })
+            res.send({
+                    result: true,
+                    data: result,
+                })
+        }
+    } catch(err){
+        console.error(err);
+        res.status(500);
+        res.send({
+            result: false,
+            error: 'DB error'
+        });
+    }
+}
 
 
 export {
-    createItem, getItemBySearchWord, getItemById, getItemByUserId
+    createItem, getItemBySearchWord, getItemById, getItemByUserId, updateStage, updateDue, updateEggPoint, updateMemberLimit
 }

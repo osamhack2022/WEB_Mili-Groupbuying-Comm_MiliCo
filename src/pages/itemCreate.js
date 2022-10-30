@@ -4,6 +4,7 @@ import { Select, message, InputNumber, Slider, Divider, Button, Form, Input, Rad
 import { useNavigate } from "react-router-dom";
 
 const ItemCreate = (props) => {
+    const PRESENTATIONIMAGE = "https://postfiles.pstatic.net/MjAyMjEwMjdfNzEg/MDAxNjY2ODYzMzAyNTIy.S6q8tfqOpwj4ImgoDBeuvwCzX38mqNNkdbnh0NH4_gIg.Ou8KHWv7GHP87zafQsfR0AKmTXGd7IDXBq2u6wYSkfkg.PNG.cgl00/haha.PNG?type=w966"
     const navigate = useNavigate();
     const formItemLayout = 
         {
@@ -17,8 +18,8 @@ const ItemCreate = (props) => {
     const buttonItemLayout =
         {
             wrapperCol: {
-                span: 14,
-                offset: 4,
+                span: 24,
+                offset: 22,
             },
         };
     const onFinish = async (values) => {
@@ -26,24 +27,26 @@ const ItemCreate = (props) => {
             if(!props.login){ 
                 message.error("로그인을 해주세요.");
                 throw "no session"; }
-            const result = await axios.post("/rest/items", {...values, UserId:props.login});
+            const result = await axios.post("/rest/items", {...values, img: PRESENTATIONIMAGE, UserId:props.login});
             console.log(result);
             if(result.data.result){
                 message.success("성공적으로 등록되었습니다.");
-                navigate("/item/result.data.data.id");
+                navigate(`/item/${result.data.data.id}`);
             }
         } catch(err){
             console.error(err);
         }
     }
     return (
-        <div style={{padding: "100px", fontFamily:"Noto Sans KR"}}>
+        <div style={{padding: "0 100px", fontFamily:"Noto Sans KR"}}>
+            <br /><br /><br />
             <Form
             onFinish={onFinish}
             labelAlign="left"
             colon={false}
             {...formItemLayout}
             layout='horizontal'
+            style={{width:"1300px", margin: "0 auto"}}
             >
                 <Divider orientation="left">상품정보</Divider>
                 <div>
@@ -72,6 +75,7 @@ const ItemCreate = (props) => {
                             />
                     </Form.Item>
                 </div>
+                <br /><br />
                 <Divider orientation="left">모집정보</Divider>
                 <div>
                     <Form.Item 
@@ -143,7 +147,7 @@ const ItemCreate = (props) => {
                     </Form.Item>
                 </div> 
                 <Form.Item {...buttonItemLayout}>
-                    <Button type="primary" htmlType="submit">Submit</Button>
+                    <Button size="large" type="primary" htmlType="submit">생성하기</Button>
                 </Form.Item>
             </Form>
         </div>

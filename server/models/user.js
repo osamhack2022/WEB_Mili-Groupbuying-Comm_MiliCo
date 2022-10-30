@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
           comment: "믿음용사점수",
         },
+        phone: {
+          type: DataTypes.STRING(100),
+          allowNull: false,
+          comment: "믿음용사점수",
+        },
       },
       {
         comment: "유저",

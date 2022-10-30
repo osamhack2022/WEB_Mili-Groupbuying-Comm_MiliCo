@@ -43,6 +43,7 @@ app.use(session({
 app.use('/rest/users', require('./routes/user'));
 app.use('/rest/items', require('./routes/item'));
 app.use('/rest/members', require('./routes/member'));
+app.use('/rest/messages', require('./routes/message'));
 
 
 app.listen(port, () => {

@@ -11,7 +11,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(200),
             allowNull: false,
             comment: "메시지 내용",
-        }
+        },
+        link: {
+          type: DataTypes.STRING(200),
+          allowNull: true,
+          comment: "메시지 내용",
+      },
       },
       {
         comment: "메시지",
