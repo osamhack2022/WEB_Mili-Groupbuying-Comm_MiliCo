@@ -28,7 +28,6 @@ const App = ()=> {
         }
       }
       sessionCheck();
-      return ()=> {}
     },[])
 
     return (
@@ -42,12 +41,12 @@ const App = ()=> {
             <div className="site-layout-content">
               <Routes>
                 <Route path="/" element={<Intro/>}></Route>
-                <Route path="/item-list/*" element={<ItemList/>}></Route>
+                <Route path="/item-list" element={<ItemList/>}></Route>
+                <Route path="/my-item-list" element={<ItemList login={login} isMyList={true}/>}></Route>
                 <Route path="/register" element={<Register/>}></Route>
-                <Route path="/item" element={<Item/>}></Route>
-                <Route path="/item-create" element={<ItemCreate/>}></Route>
-                <Route path="/item-manage" element={<ItemManage/>}></Route>
-                <Route path="/my-item-list" element={<MyItemList/>}></Route>
+                <Route path="/item/:itemId" element={<Item login={login}/>}></Route>
+                <Route path="/item-create" element={<ItemCreate login={login} />}></Route>
+                <Route path="/item-manage/:itemId" element={<ItemManage login={login}/>}></Route>
               </Routes>
             </div>
           </Content>

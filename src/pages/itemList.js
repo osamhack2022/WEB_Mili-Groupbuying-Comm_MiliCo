@@ -1,97 +1,114 @@
 import React from "react";
-import {Row, Col, Pagination, Button} from "antd"
+import {Row, Col, Pagination, Button, message, Badge, Carousel} from "antd"
 import { SmileTwoTone } from '@ant-design/icons';
 import ItemCard from "../components/itemCard";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { useSearchParams, useParams } from "react-router-dom";
+import ad1 from "../assets/img/ad1.png";
+import ad2 from "../assets/img/ad2.png";
+import ad3 from "../assets/img/ad3.png";
+import axios from "axios";
 
 
+const ItemList = (props) => {
+    const navigate = useNavigate();
+    const [itemList, setItemList] = useState([]);
+    const [page, setPage] = useState(0);
 
-class Result extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            testData: [
-                {
-                    title:"부대&lt;-&gt;춘천고속버스터미널 택시이동",
-                    progress:"4명 중 3명 모집완료",
-                    host:"12중대 상병 김육군",
-                    infoLink:"https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/55376_1465201860256786.jpg?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80"
-                },
-                {
-                    title:"스프라이트사이다500mL 8개 묶음",
-                    progress:"10명 중 8명 모집완료",
-                    host:"본부중대 일병 이공군",
-                    infoLink:"https://www.coupang.com/vp/products/1650352?itemId=2208484&vendorItemId=81168170813&q=%EC%8A%A4%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8A%B8+500&itemsCount=36&searchId=a11fd33a89aa4257ae9a527a3041ddd4&rank=0&isAddedCart="
-                },
-                {
-                    title:"24일 도미노 피자 3판 배달",
-                    progress:"5명 중 2명 모집완료",
-                    host:"9중대 이병 김해병",
-                    infoLink:"https://www.tiendeo.co.kr/%EB%A7%A4%EC%9E%A5/%EC%B6%98%EC%B2%9C%EC%8B%9C/%EB%8F%84%EB%AF%B8%EB%85%B8%ED%94%BC%EC%9E%90"
-                },
-                {
-                    title:"부대&lt;-&gt;춘천고속버스터미널 택시이동",
-                    progress:"4명 중 3명 모집완료",
-                    host:"12중대 상병 김육군",
-                    infoLink:"https://zobb.tistory.com/73"
-                },
-                {
-                    title:"스프라이트사이다500mL 8개 묶음",
-                    progress:"10명 중 8명 모집완료",
-                    host:"본부중대 일병 이공군",
-                    infoLink:"https://www.coupang.com/vp/products/1650352?itemId=2208484&vendorItemId=81168170813&q=%EC%8A%A4%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8A%B8+500&itemsCount=36&searchId=a11fd33a89aa4257ae9a527a3041ddd4&rank=0&isAddedCart="
-                },
-                {
-                    title:"24일 도미노 피자 3판 배달",
-                    progress:"5명 중 2명 모집완료",
-                    host:"9중대 이병 김해병",
-                    infoLink:"https://www.tiendeo.co.kr/%EB%A7%A4%EC%9E%A5/%EC%B6%98%EC%B2%9C%EC%8B%9C/%EB%8F%84%EB%AF%B8%EB%85%B8%ED%94%BC%EC%9E%90"
-                },
-                {
-                    title:"부대&lt;-&gt;춘천고속버스터미널 택시이동",
-                    progress:"4명 중 3명 모집완료",
-                    host:"12중대 상병 김육군",
-                    infoLink:"https://zobb.tistory.com/73"
+    //react-router-dom v6의 query string 가져오는 방법
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get('searchWord');
+    const searchWordQuery = {                      
+        searchWord: query
+    }
+
+
+    useEffect(()=>{
+        const listUpdate = async () => {
+            try{
+                let result;
+                if(props.isMyList){
+                    const r = await axios.get(`/rest/items/member/${props.login}`);
+                    result = r.data.data.map(x=>x.Item);
+                } else {
+                    result = await axios.get("/rest/items", {params: searchWordQuery});
+                    result = result.data.data;
                 }
-            ],
-        };
-    }
-    render(){
-        return(
-            <>
-            <p style={{padding: "10px 220px", fontSize:"1.5rem"}}><strong>뭐시기 뭐시기</strong> 검색결과</p>
-          <Row style={{margin:"0 200px"}}>
-            {      
-                this.state.testData.map( 
-                    (el,i) =>   <Col key={i} span={6}> 
-                                    <Link to="/item"><ItemCard data={el}></ItemCard></Link>
-                                </Col>)
+                if(result){
+                    const rawData = result;
+                    const displayData = rawData.map(el => ({
+                        id: el.id,
+                        title: el.title,
+                        progress: `${el.member_limit}명 중 ${el.member_current}명 모집완료`,
+                        infoLink: el.link,
+                        img: el.img
+                    }));
+                    setItemList(displayData);
+                }else{
+                }
+            } catch (err) {
+                console.error(err);
             }
+        } 
+        listUpdate();
+    },[props.login])
+    
+    return(
+        <>
+        <p style={{padding: "10px 220px", fontSize:"1.5rem"}}>{props.isMyList ? <>나의 공동구매</> : <><strong>{query=="market"?"공동구매":query}</strong> 검색결과</> }</p>
+        <Row style={{margin:"0 200px"}}>
+        {props.isMyList ? '' : 
             <Col span={6}>       
-                <div style={{padding:"20px", width:"100%", height:"100%"}}>
-                    <Link to="/item-create">
-                        <Button style={{width:"100%", height:"100%", fontWeight:"100", fontSize:"2rem"}} type="dashed" block>
-                            <div>
-                                <SmileTwoTone style={{fontSize:"3rem"}}/>
-                                <div
-                                    style={{
-                                    marginTop: 8,
-                                    }}
-                                >
-                                    원하는 상품이 없다면 <br/>
-                                    직접 모집해보세요!
+            <div style={{padding:"20px", width:"100%", height:"100%"}}>
+                    <Badge.Ribbon text="ads">
+                        { query=="로카티" ? <img src={ad1} style={{height:"100%", width:"100%"}} /> :
+                            <Carousel autoplay={true}>
+                                <div>
+                                    <img src={ad1} style={{width:"100%", height:"100%"}} />
                                 </div>
+                                <div>
+                                    <img src={ad2} style={{width:"100%", height:"100%"}} />
+                                </div>
+                                <div>
+                                    <img src={ad3} style={{width:"100%", height:"100%"}} />
+                                </div>
+                            </Carousel>
+                        }
+                    </Badge.Ribbon>
+            </div>      
+        </Col>}
+        {      
+            itemList.slice(page*6, (page+1)*6).map( 
+                (el,i) =>   <Col key={i} span={6}> 
+                                <Link to={props.isMyList ? `/item-manage/${el.id}`:`/item/${el.id}`}><ItemCard data={el}></ItemCard></Link>
+                            </Col>)
+        }
+        {props.isMyList ? '' : 
+            <Col span={6}>       
+            <div style={{padding:"20px", width:"100%", height:"100%"}}>
+                <Link to="/item-create">
+                    <Button style={{width:"100%", height:"100%", fontWeight:"100", fontSize:"2rem"}} type="dashed" block>
+                        <div>
+                            <SmileTwoTone style={{fontSize:"3rem"}}/>
+                            <div
+                                style={{
+                                marginTop: 8,
+                                }}
+                            >
+                                원하는 상품이 없다면 <br/>
+                                직접 모집해보세요!
                             </div>
-                        </Button>
-                    </Link>
-                </div>      
-            </Col>
-          </Row> 
-          <Pagination size="small" total={50} style={{textAlign:"center"}} />
-          </>
-        );
-    }
+                        </div>
+                    </Button>
+                </Link>
+            </div>      
+        </Col>}
+        </Row> 
+        <Pagination size="small" defaultPageSize={6} total={itemList.length} onChange={(page, pageSize)=> {console.log(page);setPage(page-1);}} style={{textAlign:"center"}} />
+        </>
+    );
 }
 
 
-export default Result;
+export default ItemList;
