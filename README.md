@@ -1,54 +1,108 @@
-# WEB_Mili-Groupbuying-Comm_MiliCo
+# WEB_Mili-Groupbuying-Comm_MiliCo ![badge](https://img.shields.io/badge/license-MIT-blue) ![badge](https://img.shields.io/badge/node-16.17.0-blue)
 
 군인들을 위한 공동구매 커뮤니티
-(Military Groupbuying Community)
+(Cobuying Community for ROK Soldiers)
 
-![Logo](https://logosbynick.com/wp-content/uploads/2018/03/final-logo-example.png)
+![Logo](https://raw.githubusercontent.com/osamhack2022/WEB_Mili-Groupbuying-Comm_MiliCo/main/src/assets/img/JJMicon.png)
 
-## npm install
+## 프로젝트 소개 (Introduction)
 
-## npm run start
+- 군부대 내에서 장병간 공동구매를 모집하고 참여할 수 있는 node 기반 웹 서비스
+  <br/><br/>
 
-## 프로잭트 소개
+## 기능 설명 (Key Features)
 
-- 산간지역에 위치한 군부대의 특성 상 택배 또는 배달이 용이하지 않을 경우가 많습니다. 따라서 대량 구매또는 대량 배달만 이용가능 할 때가 많은데, 개인이 이러한 선택을 하기에는 부담이 큽니다. 군인 공동구매 커뮤니티를 통해 부대원들끼리 공동구매를 용이하게 하여 군생활에 편의를 더하고자 합니다.
+1. 인터넷쇼핑 공동구매 / 배달음식 공동배달 / 택시합승 공동모집 등 다양한 **공동구매의 모집** 및 참여
+2. 입금 및 상품 수령 등 **공동구매 과정 간편 관리**
+3. 공동구매 신뢰성 보장 (속칭 **공구사기 방지**)
+   <br/><br/>
 
-## 기능 설명
+## 웹 호환성 (Browser Compatibility)
 
-1. 부대구성원들의 공동구매/배달 모집
-2. 구매모집 간 가게/상품 추천노출로 부대 주변 상권 홍보효과
-3. 웹서비스의 특성을 활용하여 공동구매 시 가격지불, 상품수령의 신뢰 문제 해결
+- ECMAScript 6 지원 브라우저 사용  
+  ![badge](https://img.shields.io/badge/chrome-51.0%2B-orange)
+  ![badge](https://img.shields.io/badge/ie-15.0%2B-orange)
+  ![badge](https://img.shields.io/badge/firefox-54.0%2B-orange)
 
-## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
-
-- ECMAScript 6 지원 브라우저 사용
-- 권장: Google Chrome 버젼 77 이상
+- 권장: Google Chrome 버젼 77 이상  
+  ![badge](https://img.shields.io/badge/chrome-77.0%2B-green)
+  <br/><br/>
 
 ## 기술 스택 (Technique Used)
 
-### Server(back-end)
+### Back-end
 
-- nodejs, php, java 등 서버 언어 버전
-- express, laravel, sptring boot 등 사용한 프레임워크
-- DB 등 사용한 다른 프로그램
+- [`node.js`](https://nodejs.org/ko/) + [`Express`](https://expressjs.com/ko/) (WAS + rest api 서버)
+- [`mysql`](https://www.mysql.com/) + [`Sequelize`](https://sequelize.org/v4/) (Database + ORM)
+- [`linkpreview API`](https://www.linkpreview.net/) (웹 링크 이미지 가져오기 API)
 
-### Client(Front-end)
+### Front-end
 
-- react.js, vue.js 등 사용한 front-end 프레임워크
-- UI framework
-- 기타 사용한 라이브러리
+- [`react.js`](https://ko.reactjs.org/) (front-end library)
+- [`ant design`](https://ant.design/) (react UI library)
+  <br/><br/>
 
-## 설치 안내 (Installation Process)
+## 네이밍 룰 (Naming Convention)
 
-```bash
-$ git clone git주소
-$ yarn or npm install
-$ yarn start or npm run start
+1. /src/page, /src/page/component js파일들 → 카멜표기법
+2. database table 이름 → 파스칼 표기법
+3. datbase column 등 → 스네이크 표기법
+
+<br/><br/>
+<br/><br/>
+
+## 설치 안내 (Installation)
+
+### 필수 구성 환경 (Prerequisites)
+
+- Mysql (v5.7.x)
+- Node.js (v16.17.x Gallium)
+- npm (v8.15.x)
+
+### 1. Clone
+
+```shell
+$ git clone https://github.com/osamhack2022/WEB_Mili-Groupbuying-Comm_MiliCo
 ```
 
-## 프로젝트 사용법 (Getting Started)
+### 2. Install Packages
 
-**마크다운 문법을 이용하여 자유롭게 기재**
+```bash
+$ npm install
+```
+
+### 3-A. 개발 모드 (Development Mode)
+
+서버 시작 후,
+[`http://localhost:3000`](http://localhost:3000) 에 접속
+
+**개발 모드**: react-dev-server(:3000) & express-server(:3001) 동시 구동.  
+**요청 흐름**: react-dev-server → proxy → express
+
+### 3-A-1. Start webpack-dev-server (frontend development, hot reloading)
+
+```shell
+$ npm run dev
+```
+
+### 3-A-2. Start express server (backend development, hot reloading)
+
+```shell
+$ npm run start
+```
+
+### 3-B. 배포 모드 (Production Mode)
+
+서버 시작 후,
+[`http://localhost:3000`](http://localhost:3000) 에 접속
+
+### 3-B-1. Build front-side && Start production server
+
+```shell
+$ npm run build start
+```
+
+<br/><br/> <br/><br/>
 
 ## 팀 정보 (Team Information)
 
@@ -64,7 +118,7 @@ $ yarn start or npm run start
  <tr>
   <td align='center'><img src="https://avatars.githubusercontent.com/u/55678893?s=400&u=d33563c6434ee31ca9962788e006604cbaa51ca9&v=4" width="50" height="50"></td>
   <td align='center'>Byeonggyu Park</td>
-  <td align='center'>What's my role?</td>
+  <td align='center'>Team leader, Backend, Productivity Management</td>
   <td align='center'><a href="https://github.com/ggyuchive"><img src="http://img.shields.io/badge/ggyuchive-green?style=social&logo=github"/></a></td>
   <td align='center'><a href="mailto:zarami1214@g.skku.edu"><img src="https://img.shields.io/badge/zarami1214@g.skku.edu-green?logo=gmail&style=social"/></a></td>
  </tr>
@@ -72,14 +126,18 @@ $ yarn start or npm run start
  <tr>
   <td align='center'><img src="https://avatars.githubusercontent.com/u/31601268?v=4" width="50" height="50"></td>
   <td align='center'>Changoo Lee</td>
-  <td align='center'>What's my role?</td>
+  <td align='center'>UI design, Frontend, Database</td>
   <td align='center'><a href="https://github.com/changooo"><img src="http://img.shields.io/badge/changooo-green?style=social&logo=github"/></a></td>
   <td align='center'><a href="mailto:cgl00@g.skku.edu"><img src="https://img.shields.io/badge/cgl00@g.skku.edu-green?logo=gmail&style=social"/></a></td>
  </tr>
 </table>
+
+<br/>
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
 
 - [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
 
 This project is licensed under the terms of the MIT license.
+
+<!-- Copyright ⓒ 2022 MILICOM All Right Reserved -->
